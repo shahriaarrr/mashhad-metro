@@ -124,6 +124,14 @@ class StationService {
         .toList();
   }
 
+  Future<List<StationModel>> getStationByLine(int lineNumber) async {
+    final stations = await loadStations();
+
+    return stations
+        .where((station) => station.lines.contains(lineNumber))
+        .toList();
+  }
+
   Future<List<int>> getAllLines() async {
     final stations = await loadStations();
     final lineSet = <int>{};
