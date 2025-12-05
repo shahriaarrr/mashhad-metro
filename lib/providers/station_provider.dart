@@ -6,7 +6,7 @@ final stationServiceProvider = Provider<StationService>((ref) {
   return StationService();
 });
 
-final allStationProvider = FutureProvider<List<StationModel>>((ref) async {
+final allStationsProvider = FutureProvider<List<StationModel>>((ref) async {
   final service = ref.watch(stationServiceProvider);
   return service.loadStations();
 });
