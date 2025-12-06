@@ -29,7 +29,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Koohestan Park"]
+        "relations": ["Koohestan Park"],
+        "positionInLine": [{
+            "position": 1,
+            "line": 1
+        }]
     },
     "Koohestan Park": {
         "name": "Koohestan Park",
@@ -61,7 +65,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Namayeshgah"]
+        "relations": ["Namayeshgah"],
+        "positionInLine": [{
+            "position": 2,
+            "line": 1
+        }]
     },
     "Namayeshgah": {
         "name": "Namayeshgah",
@@ -93,7 +101,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Eghbal-e-Lahouri"]
+        "relations": ["Eghbal-e-Lahouri"],
+        "positionInLine": [{
+            "position": 3,
+            "line": 1
+        }]
     },
     "Eghbal-e-Lahouri": {
         "name": "Eghbal-e-Lahouri",
@@ -125,7 +137,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Sayyad-e-Shirazi"]
+        "relations": ["Sayyad-e-Shirazi"],
+        "positionInLine": [{
+            "position": 4,
+            "line": 1
+        }]
     },
     "Sayyad-e-Shirazi": {
         "name": "Sayyad-e-Shirazi",
@@ -157,7 +173,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Sadaf"]
+        "relations": ["Sadaf"],
+        "positionInLine": [{
+            "position": 5,
+            "line": 1
+        }]
     },
     "Sadaf": {
         "name": "Sadaf",
@@ -189,7 +209,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Haft-e-Tir"]
+        "relations": ["Haft-e-Tir"],
+        "positionInLine": [{
+            "position": 6,
+            "line": 1
+        }]
     },
     "Haft-e-Tir": {
         "name": "Haft-e-Tir",
@@ -221,7 +245,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Danesh Amooz"]
+        "relations": ["Danesh Amooz"],
+        "positionInLine": [{
+            "position": 7,
+            "line": 1
+        }]
     },
     "Danesh Amooz": {
         "name": "Danesh Amooz",
@@ -253,7 +281,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Seyyed Razi"]
+        "relations": ["Seyyed Razi"],
+        "positionInLine": [{
+            "position": 8,
+            "line": 1
+        }]
     },
     "Seyyed Razi": {
         "name": "Seyyed Razi",
@@ -285,7 +317,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Kowsar"]
+        "relations": ["Kowsar"],
+        "positionInLine": [{
+            "position": 9,
+            "line": 1
+        }]
     },
     "Kowsar": {
         "name": "Kowsar",
@@ -317,7 +353,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Park-e-Mellat"]
+        "relations": ["Park-e-Mellat"],
+        "positionInLine": [{
+            "position": 10,
+            "line": 1
+        }]
     },
     "Park-e-Mellat": {
         "name": "Park-e-Mellat",
@@ -349,7 +389,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": false,
-        "relations": ["Azadi"]
+        "relations": ["Azadi"],
+        "positionInLine": [{
+            "position": 11,
+            "line": 1
+        }]
     },
     "Azadi": {
         "name": "Azadi",
@@ -381,7 +425,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Khayyam"]
+        "relations": ["Khayyam"],
+        "positionInLine": [{
+            "position": 12,
+            "line": 1
+        }]
     },
     "Khayyam": {
         "name": "Khayyam",
@@ -413,7 +461,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Palestine"]
+        "relations": ["Palestine"],
+        "positionInLine": [{
+            "position": 13,
+            "line": 1
+        }]
     },
     "Palestine": {
         "name": "Palestine",
@@ -445,7 +497,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Taleghani"]
+        "relations": ["Taleghani"],
+        "positionInLine": [{
+            "position": 14,
+            "line": 1
+        }]
     },
     "Taleghani": {
         "name": "Taleghani",
@@ -477,7 +533,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Ghaem"]
+        "relations": ["Ghaem"],
+        "positionInLine": [{
+            "position": 15,
+            "line": 1
+        }]
     },
     "Ghaem": {
         "name": "Ghaem",
@@ -509,7 +569,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Shariati"]
+        "relations": ["Shariati"],
+        "positionInLine": [{
+            "position": 16,
+            "line": 1
+        }]
     },
     "Shariati": {
         "name": "Shariati",
@@ -541,7 +605,17 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": [ "Imam Khomeini", "Alandasht"]
+        "relations": [ "Imam Khomeini", "Alandasht"],
+        "positionInLine": [
+            {
+                "position": 17,
+                "line": 1
+            },
+            {
+                "position": 9,
+                "line": 2
+            }
+        ]
     },
     "Imam Khomeini": {
         "name": "Imam Khomeini",
@@ -573,7 +647,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Basij"]
+        "relations": ["Basij"],
+        "positionInLine": [{
+            "position": 18,
+            "line": 1
+        }]
     },
     "Basij": {
         "name": "Basij",
@@ -605,7 +683,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Hefdah-e-Shahrivar"]
+        "relations": ["Hefdah-e-Shahrivar"],
+        "positionInLine": [{
+            "position": 19,
+            "line": 1
+        }]
     },
     "Hefdah-e-Shahrivar": {
         "name": "Hefdah-e-Shahrivar",
@@ -637,7 +719,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Parvin Etesami"]
+        "relations": ["Parvin Etesami"],
+        "positionInLine": [{
+            "position": 20,
+            "line": 1
+        }]
     },
     "Parvin Etesami": {
         "name": "Parvin Etesami",
@@ -669,7 +755,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Ghadir"]
+        "relations": ["Ghadir"],
+        "positionInLine": [{
+            "position": 21,
+            "line": 1
+        }]
     },
     "Ghadir": {
         "name": "Ghadir",
@@ -701,7 +791,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Bustan-e Reyhaneh"]
+        "relations": ["Bustan-e Reyhaneh"],
+        "positionInLine": [{
+            "position": 22,
+            "line": 1
+        }]
     },
     "Bustan-e Reyhaneh": {
         "name": "Bustan-e Reyhaneh",
@@ -733,7 +827,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Airport"]
+        "relations": ["Airport"],
+        "positionInLine": [{
+            "position": 23,
+            "line": 1
+        }]
     },
     "Airport": {
         "name": "Airport",
@@ -765,7 +863,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": []
+        "relations": [],
+        "positionInLine": [{
+            "position": 24,
+            "line": 1
+        }]
     },
 
     "Tabarsi": {
@@ -798,7 +900,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Velayat"]
+        "relations": ["Velayat"],
+        "positionInLine": [{
+            "position": 1,
+            "line": 2
+        }]
     },
     "Velayat": {
         "name": "Velayat",
@@ -830,7 +936,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Fajr"]
+        "relations": ["Fajr"],
+        "positionInLine": [{
+            "position": 2,
+            "line": 2
+        }]
     },
     "Fajr": {
         "name": "Fajr",
@@ -862,7 +972,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Nabovvat"]
+        "relations": ["Nabovvat"],
+        "positionInLine": [{
+            "position": 3,
+            "line": 2
+        }]
     },
     "Nabovvat": {
         "name": "Nabovvat",
@@ -894,7 +1008,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["shahid mofatteh"]
+        "relations": ["shahid mofatteh"],
+        "positionInLine": [{
+            "position": 4,
+            "line": 2
+        }]
     },
     "shahid mofatteh": {
         "name": "Nabovvat",
@@ -926,7 +1044,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Railway"]
+        "relations": ["Railway"],
+        "positionInLine": [{
+            "position": 5,
+            "line": 2
+        }]
     },
     "Railway": {
         "name": "Railway",
@@ -958,7 +1080,11 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Shohada"]
+        "relations": ["Shohada"],
+        "positionInLine": [{
+            "position": 6,
+            "line": 2
+        }]
     },
     "Shohada": {
         "name": "Shohada",
@@ -990,7 +1116,13 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Bab Al-javad","Sa'adi"]
+        "relations": ["Bab Al-javad","Sa'adi"],
+        "positionInLine": [
+            {
+                "position": 7,
+                "line": 2
+            }
+        ]
     },
     "Sa'adi": {
         "name": "Sa'adi",
@@ -1022,7 +1154,17 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Shariati"]
+        "relations": ["Shariati"],
+        "positionInLine": [
+            {
+                "position": 8,
+                "line": 2
+            },
+            {
+                "position": 2,
+                "line": 3
+            }
+        ]
     },
     "Alandasht": {
         "name": "Alandasht",
@@ -1054,7 +1196,13 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Kouhsangi"]
+        "relations": ["Kouhsangi"],
+        "positionInLine": [
+            {
+                "position": 10,
+                "line": 2
+            }
+        ]
     },
     "Kouhsangi": {
         "name": "Kouhsangi",
@@ -1086,7 +1234,13 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["shahid kaveh"]
+        "relations": ["shahid kaveh"],
+        "positionInLine": [
+            {
+                "position": 11,
+                "line": 2
+            }
+        ]
     },
     "shahid kaveh": {
         "name": "shahid kaveh",
@@ -1118,7 +1272,13 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["shahid fakouri"]
+        "relations": ["shahid fakouri"],
+        "positionInLine": [
+            {
+                "position": 12,
+                "line": 2
+            }
+        ]
     },
     "shahid fakouri": {
         "name": "shahid fakouri",
@@ -1150,7 +1310,13 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": []
+        "relations": [],
+        "positionInLine": [
+            {
+                "position": 13,
+                "line": 2
+            }
+        ]
     },
 
     "Imam Reza Terminal": {
@@ -1183,7 +1349,13 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Shohada"]
+        "relations": ["Shohada"],
+        "positionInLine": [
+            {
+                "position": 1,
+                "line": 3
+            }
+        ]
     },
     "Bab Al-javad": {
         "name": "Bab Al-javad",
@@ -1215,6 +1387,12 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Shohada"]
+        "relations": [],
+        "positionInLine": [
+            {
+                "position": 3,
+                "line": 3
+            }
+        ]
     }
 }
