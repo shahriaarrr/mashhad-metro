@@ -29,6 +29,7 @@ class StationModel {
   final bool freeWifi;
   final bool prayerRoom;
   final List<String> relations;
+  final List<Map<String, int>> positionInLine;
 
   StationModel({
     required this.name,
@@ -61,6 +62,7 @@ class StationModel {
     required this.freeWifi,
     required this.prayerRoom,
     required this.relations,
+    required this.positionInLine,
   });
 
   factory StationModel.fromJson(String key, Map<String, dynamic> json) {
@@ -95,6 +97,9 @@ class StationModel {
       freeWifi: json['freeWifi'] as bool,
       prayerRoom: json['prayerRoom'] as bool,
       relations: List<String>.from(json['relations'] as List),
+      positionInLine: (json['positionInLine'] as List)
+          .map((item) => Map<String, int>.from(item as Map))
+          .toList(),
     );
   }
 
@@ -103,12 +108,20 @@ class StationModel {
     return 'StationModel(name: $name, fa: ${translations['fa']})';
   }
 
+  int? getPositionInLine(int lineNumber) {
+    try {
+      final position = positionInLine.firstWhere(
+        (item) => item['line'] == lineNumber,
+      );
+      return position['position'];
+    } catch (e) {
+      return null;
+    }
+  }
+
   @override
   bool operator ==(Object other) {
-    if (identical(this, other)) {
-      return true;
-    }
-
+    if (identical(this, other)) return true;
     return other is StationModel && other.name == name;
   }
 

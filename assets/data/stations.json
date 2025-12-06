@@ -1121,6 +1121,10 @@
             {
                 "position": 7,
                 "line": 2
+            },
+            {
+                "position": 2,
+                "line": 3
             }
         ]
     },

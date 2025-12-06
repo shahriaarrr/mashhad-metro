@@ -26,7 +26,7 @@ final searchResultsProvider = FutureProvider<List<StationModel>>((ref) async {
 
 final selectedLineProvider = StateProvider<int?>((ref) => null);
 
-final stationByLineProvider = FutureProvider<List<StationModel>>((ref) async {
+final stationsByLineProvider = FutureProvider<List<StationModel>>((ref) async {
   final service = ref.watch(stationServiceProvider);
   final selectedLine = ref.watch(selectedLineProvider);
 
@@ -34,7 +34,7 @@ final stationByLineProvider = FutureProvider<List<StationModel>>((ref) async {
     return service.loadStations();
   }
 
-  return service.getStationByLine(selectedLine);
+  return service.getStationsByLine(selectedLine);
 });
 
 final stationByNameProvider = FutureProvider.family<StationModel?, String>((
@@ -164,3 +164,12 @@ final allLinesProvider = FutureProvider<List<int>>((ref) async {
   final service = ref.watch(stationServiceProvider);
   return service.getAllLines();
 });
+
+final firstAndLastStationProvider =
+    FutureProvider.family<Map<String, StationModel?>, int>((
+      ref,
+      lineNumber,
+    ) async {
+      final service = ref.watch(stationServiceProvider);
+      return service.getFirstAndLastStation(lineNumber);
+    });

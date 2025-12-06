@@ -22,7 +22,7 @@ class StationService {
 
       return _cachedStations!;
     } catch (e) {
-      throw Exception("Error loading stations: $e ");
+      throw Exception('خطا در بارگذاری ایستگاه‌ها: $e');
     }
   }
 
@@ -35,11 +35,19 @@ class StationService {
     }
   }
 
-  Future<List<StationModel>> getStationsByName(int lineNumber) async {
+  Future<List<StationModel>> getStationsByLine(int lineNumber) async {
     final stations = await loadStations();
-    return stations
+    final lineStations = stations
         .where((station) => station.lines.contains(lineNumber))
         .toList();
+
+    lineStations.sort((a, b) {
+      final posA = a.getPositionInLine(lineNumber) ?? 0;
+      final posB = b.getPositionInLine(lineNumber) ?? 0;
+      return posA.compareTo(posB);
+    });
+
+    return lineStations;
   }
 
   Future<List<StationModel>> searchStations(String query) async {
@@ -49,7 +57,6 @@ class StationService {
     return stations.where((station) {
       final faName = station.translations['fa']?.toLowerCase() ?? '';
       final enName = station.name.toLowerCase();
-
       return faName.contains(lowerQuery) || enName.contains(lowerQuery);
     }).toList();
   }
@@ -113,33 +120,16 @@ class StationService {
 
   Future<List<StationModel>> getNearbyStations(String stationName) async {
     final station = await getStationByName(stationName);
-
     if (station == null || station.relations.isEmpty) {
       return [];
     }
-    final stations = await loadStations();
 
-    return stations
-        .where((stn) => station.relations.contains(stn.name))
-        .toList();
+    final stations = await loadStations();
+    return stations.where((s) => station.relations.contains(s.name)).toList();
   }
 
-  Future<List<StationModel>> getStationByLine(int lineNumber) async {
-    final stations = await loadStations();
-
-    return stations
-        .where((station) => station.lines.contains(lineNumber))
-        .toList();
-  }
-
-  Future<List<int>> getAllLines() async {
-    final stations = await loadStations();
-    final lineSet = <int>{};
-    for (var station in stations) {
-      lineSet.addAll(station.lines);
-    }
-
-    return lineSet.toList()..sort();
+  void clearCache() {
+    _cachedStations = null;
   }
 
   Future<int> getStationsCount() async {
@@ -147,7 +137,24 @@ class StationService {
     return stations.length;
   }
 
-  void clearCache() {
-    _cachedStations = null;
+  Future<List<int>> getAllLines() async {
+    final stations = await loadStations();
+    final linesSet = <int>{};
+    for (var station in stations) {
+      linesSet.addAll(station.lines);
+    }
+    return linesSet.toList()..sort();
+  }
+
+  Future<Map<String, StationModel?>> getFirstAndLastStation(
+    int lineNumber,
+  ) async {
+    final stations = await getStationsByLine(lineNumber);
+
+    if (stations.isEmpty) {
+      return {'first': null, 'last': null};
+    }
+
+    return {'first': stations.first, 'last': stations.last};
   }
 }
