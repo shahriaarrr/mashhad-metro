@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mashhad_metro/pages/LineDetail.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
 import 'package:mashhad_metro/models/station_model.dart';
 import 'package:mashhad_metro/widgets/line_card.dart';
@@ -68,7 +69,17 @@ class MyHomePage extends ConsumerWidget {
                 firstStationEn: data['firstStationEn'],
                 lastStationEn: data['lastStationEn'],
                 onTab: () {
-                  print('خط ${data['lineNumber']} کلیک شد');
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => LineDetailPage(
+                        lineNumber: data['lineNumber'],
+                        lineColor: data['color'],
+                        lineName:
+                            '${data['firstStation']} / ${data['lastStation']}',
+                      ),
+                    ),
+                  );
                 },
               );
             },
