@@ -68,7 +68,7 @@ class MyHomePage extends ConsumerWidget {
                 lastStation: data['lastStation'],
                 firstStationEn: data['firstStationEn'],
                 lastStationEn: data['lastStationEn'],
-                onTab: () {
+                onTap: () {
                   Navigator.push(
                     context,
                     MaterialPageRoute(

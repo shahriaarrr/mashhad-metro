@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:mashhad_metro/models/station_model.dart';
+import '../models/station_model.dart';
+import 'package:mashhad_metro/pages/station_details.dart';
 
 class StationItem extends StatelessWidget {
   final StationModel station;
@@ -25,8 +26,6 @@ class StationItem extends StatelessWidget {
         .where((line) => line != currentLineNumber)
         .toList();
     final hasTransfer = otherLines.isNotEmpty;
-
-    final stationFa = station.translations['fa'];
 
     return IntrinsicHeight(
       child: Row(
@@ -70,7 +69,6 @@ class StationItem extends StatelessWidget {
                       ),
                     ],
                   ),
-
                   child: hasTransfer
                       ? Center(
                           child: Container(
@@ -102,7 +100,7 @@ class StationItem extends StatelessWidget {
                     ),
                   )
                 else
-                  const SizedBox(width: 8),
+                  const SizedBox(height: 8),
               ],
             ),
           ),
@@ -116,7 +114,13 @@ class StationItem extends StatelessWidget {
                 color: Colors.transparent,
                 child: InkWell(
                   onTap: () {
-                    print('ایستگاه ${station.name} کلیک شد');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) =>
+                            StationDetail(stationName: station.name),
+                      ),
+                    );
                   },
                   borderRadius: BorderRadius.circular(16),
                   child: Container(
@@ -137,7 +141,6 @@ class StationItem extends StatelessWidget {
                         ),
                       ],
                     ),
-
                     child: Padding(
                       padding: const EdgeInsets.all(16),
                       child: Column(
@@ -149,33 +152,33 @@ class StationItem extends StatelessWidget {
                                 child: Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    if (!station.nearHolyshrine)
-                                      Text(
-                                        stationFa ?? station.name,
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      )
-                                    else
-                                      Text(
-                                        "$stationFa 🕌",
-                                        style: TextStyle(
-                                          color: Colors.white,
-                                          fontSize: 18,
-                                          fontWeight: FontWeight.bold,
-                                        ),
+                                    Text(
+                                      station.translations['fa'] ??
+                                          station.name,
+                                      style: const TextStyle(
+                                        color: Colors.white,
+                                        fontSize: 19,
+                                        fontWeight: FontWeight.bold,
+                                        height: 1.4,
+                                        shadows: [
+                                          Shadow(
+                                            color: Colors.black26,
+                                            offset: Offset(0, 1),
+                                            blurRadius: 2,
+                                          ),
+                                        ],
                                       ),
-
+                                    ),
                                     const SizedBox(height: 4),
 
                                     Text(
                                       station.name.toUpperCase(),
                                       style: TextStyle(
-                                        color: Colors.white.withOpacity(0.7),
+                                        color: Colors.white.withOpacity(0.8),
                                         fontSize: 12,
-                                        letterSpacing: 0.5,
+                                        letterSpacing: 0.8,
+                                        fontWeight: FontWeight.w500,
+                                        height: 1.2,
                                       ),
                                     ),
                                   ],
@@ -193,8 +196,8 @@ class StationItem extends StatelessWidget {
                           if (hasTransfer) ...[
                             const SizedBox(height: 12),
                             Wrap(
-                              spacing: 0,
-                              runSpacing: 0,
+                              spacing: 8,
+                              runSpacing: 8,
                               children: otherLines.map((lineNum) {
                                 final lineColor = _getLineColor(lineNum);
                                 return Container(
@@ -229,10 +232,17 @@ class StationItem extends StatelessWidget {
                                       const SizedBox(width: 4),
                                       Text(
                                         'خط $lineNum',
-                                        style: TextStyle(
+                                        style: const TextStyle(
                                           color: Colors.white,
-                                          fontSize: 12,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.bold,
+                                          shadows: [
+                                            Shadow(
+                                              color: Colors.black26,
+                                              offset: Offset(0, 1),
+                                              blurRadius: 2,
+                                            ),
+                                          ],
                                         ),
                                       ),
                                     ],
