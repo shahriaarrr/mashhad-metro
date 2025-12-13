@@ -220,18 +220,23 @@ class _MapPageState extends ConsumerState<MapPage> {
               ),
 
               Positioned(
-                bottom: 20,
+                bottom: MediaQuery.of(context).padding.bottom + 20,
                 right: 20,
-                child: FloatingActionButton(
-                  onPressed: _isLoadingLocation ? null : _getCurrentLocation,
-                  backgroundColor: Colors.white,
-                  child: _isLoadingLocation
-                      ? const SizedBox(
-                          width: 24,
-                          height: 24,
-                          child: CircularProgressIndicator(strokeWidth: 2),
-                        )
-                      : const Icon(Icons.my_location, color: Colors.deepPurple),
+                child: SafeArea(
+                  child: FloatingActionButton(
+                    onPressed: _isLoadingLocation ? null : _getCurrentLocation,
+                    backgroundColor: Colors.white,
+                    child: _isLoadingLocation
+                        ? const SizedBox(
+                            width: 24,
+                            height: 24,
+                            child: CircularProgressIndicator(strokeWidth: 2),
+                          )
+                        : const Icon(
+                            Icons.my_location,
+                            color: Colors.deepPurple,
+                          ),
+                  ),
                 ),
               ),
             ],
@@ -328,99 +333,110 @@ class _MapPageState extends ConsumerState<MapPage> {
     showModalBottomSheet(
       context: context,
       backgroundColor: Colors.transparent,
+      isScrollControlled: true,
       builder: (context) => Container(
         decoration: const BoxDecoration(
           color: Color(0xFF2D2D2D),
           borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
-        padding: const EdgeInsets.all(20),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.end,
-          children: [
-            Text(
-              station.translations['fa'] ?? station.name,
-              style: const TextStyle(
-                color: Colors.white,
-                fontSize: 22,
-                fontWeight: FontWeight.bold,
-              ),
-              textAlign: TextAlign.right,
-            ),
-            const SizedBox(height: 4),
-            Text(
-              station.name.toUpperCase(),
-              style: TextStyle(
-                color: Colors.white.withOpacity(0.7),
-                fontSize: 16,
-                fontWeight: FontWeight.bold,
-                letterSpacing: 0.8,
-              ),
-              textAlign: TextAlign.right,
-            ),
-            const SizedBox(height: 16),
-
-            Wrap(
-              spacing: 8,
-              runSpacing: 8,
-              alignment: WrapAlignment.end,
-              children: station.lines.map((lineNum) {
-                final color = _parseColor(
-                  station.colors.isNotEmpty ? station.colors.first : '#87CEEB',
-                );
-                return Container(
-                  padding: const EdgeInsets.symmetric(
-                    horizontal: 12,
-                    vertical: 6,
-                  ),
-                  decoration: BoxDecoration(
-                    color: color,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Text(
-                    'خط $lineNum',
-                    style: const TextStyle(
-                      color: Colors.white,
-                      fontSize: 20,
-                      fontWeight: FontWeight.bold,
-                    ),
-                  ),
-                );
-              }).toList(),
-            ),
-            const SizedBox(height: 12),
-            SizedBox(
-              width: double.infinity,
-              child: ElevatedButton.icon(
-                onPressed: () {
-                  Navigator.pop(context);
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => StationDetail(stationName: station.name),
-                    ),
-                  );
-                },
-                icon: const Icon(Icons.info_outline),
-                label: const Text(
-                  'مشاهده جزئیات ایستگاه',
-                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
+        padding: EdgeInsets.only(
+          top: 20,
+          left: 20,
+          right: 20,
+          bottom: 20 + MediaQuery.of(context).viewInsets.bottom,
+        ),
+        child: SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.end,
+            children: [
+              Text(
+                station.translations['fa'] ?? station.name,
+                style: const TextStyle(
+                  color: Colors.white,
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
                 ),
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: _parseColor(
+                textAlign: TextAlign.right,
+              ),
+              const SizedBox(height: 4),
+              Text(
+                station.name.toUpperCase(),
+                style: TextStyle(
+                  color: Colors.white.withOpacity(0.7),
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  letterSpacing: 0.8,
+                ),
+                textAlign: TextAlign.right,
+              ),
+              const SizedBox(height: 16),
+
+              Wrap(
+                spacing: 8,
+                runSpacing: 8,
+                alignment: WrapAlignment.end,
+                children: station.lines.map((lineNum) {
+                  final color = _parseColor(
                     station.colors.isNotEmpty
                         ? station.colors.first
                         : '#87CEEB',
+                  );
+                  return Container(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 12,
+                      vertical: 6,
+                    ),
+                    decoration: BoxDecoration(
+                      color: color,
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    child: Text(
+                      'خط $lineNum',
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                      ),
+                    ),
+                  );
+                }).toList(),
+              ),
+              const SizedBox(height: 12),
+              SizedBox(
+                width: double.infinity,
+                child: ElevatedButton.icon(
+                  onPressed: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            StationDetail(stationName: station.name),
+                      ),
+                    );
+                  },
+                  icon: const Icon(Icons.info_outline),
+                  label: const Text(
+                    'مشاهده جزئیات ایستگاه',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  foregroundColor: Colors.white,
-                  padding: const EdgeInsets.symmetric(vertical: 14),
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(12),
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: _parseColor(
+                      station.colors.isNotEmpty
+                          ? station.colors.first
+                          : '#87CEEB',
+                    ),
+                    foregroundColor: Colors.white,
+                    padding: const EdgeInsets.symmetric(vertical: 14),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
                 ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
