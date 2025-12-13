@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mashhad_metro/pages/map.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
 import 'package:mashhad_metro/models/station_model.dart';
 
@@ -401,16 +402,11 @@ class StationDetail extends ConsumerWidget {
             Expanded(
               child: ElevatedButton.icon(
                 onPressed: () {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text(
-                        'قابلیت نمایش در نقشه به زودی اضافه می‌شود',
-                        style: TextStyle(
-                          fontSize: 16,
-                          fontWeight: FontWeight.bold,
-                        ),
-                      ),
-                      behavior: SnackBarBehavior.floating,
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) =>
+                          MapPage(focusStationName: station.name),
                     ),
                   );
                 },

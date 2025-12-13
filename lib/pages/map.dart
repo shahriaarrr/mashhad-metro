@@ -8,10 +8,12 @@ import 'package:mashhad_metro/pages/station_details.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
 
 class MapPage extends ConsumerStatefulWidget {
-  const MapPage({super.key});
+  final String? focusStationName;
+
+  const MapPage({super.key, this.focusStationName});
 
   @override
-  ConsumerState<ConsumerStatefulWidget> createState() => _MapPageState();
+  ConsumerState<MapPage> createState() => _MapPageState();
 }
 
 class _MapPageState extends ConsumerState<MapPage> {
@@ -22,6 +24,33 @@ class _MapPageState extends ConsumerState<MapPage> {
   @override
   void initState() {
     super.initState();
+    if (widget.focusStationName != null) {
+      WidgetsBinding.instance.addPostFrameCallback((_) {
+        _focusOnStation();
+      });
+    }
+  }
+
+  void _focusOnStation() {
+    final stationAsync = ref.read(allStationsProvider);
+    stationAsync.whenData((stations) {
+      final station = stations.firstWhere(
+        (s) => s.name == widget.focusStationName,
+        orElse: () => stations.first,
+      );
+
+      final lat = double.tryParse(station.latitude);
+      final lng = double.tryParse(station.longitude);
+
+      if (lat != null && lng != null) {
+        _mapController.move(LatLng(lat, lng), 16);
+        if (mounted) {
+          Future.delayed(const Duration(milliseconds: 400), () {
+            _showStationBottomSheet(station);
+          });
+        }
+      }
+    });
   }
 
   Future<void> _getCurrentLocation() async {
@@ -30,8 +59,7 @@ class _MapPageState extends ConsumerState<MapPage> {
     });
 
     try {
-      bool serviceEnabled = await Geolocator.isLocationServiceEnabled();
-      if (!serviceEnabled) {
+      if (!await Geolocator.isLocationServiceEnabled()) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
@@ -43,29 +71,17 @@ class _MapPageState extends ConsumerState<MapPage> {
         return;
       }
 
-      LocationPermission permission = await Geolocator.checkPermission();
+      var permission = await Geolocator.checkPermission();
       if (permission == LocationPermission.denied) {
         permission = await Geolocator.requestPermission();
-        if (permission == LocationPermission.denied) {
-          if (mounted) {
-            ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(
-                content: Text('دسترسی به موقعیت مکانی رد شد'),
-                behavior: SnackBarBehavior.floating,
-              ),
-            );
-          }
-          return;
-        }
       }
 
-      if (permission == LocationPermission.deniedForever) {
+      if (permission == LocationPermission.denied ||
+          permission == LocationPermission.deniedForever) {
         if (mounted) {
           ScaffoldMessenger.of(context).showSnackBar(
             const SnackBar(
-              content: Text(
-                'لطفاً دسترسی موقعیت مکانی را از تنظیمات فعال کنید',
-              ),
+              content: Text('دسترسی موقعیت مکانی داده نشد'),
               behavior: SnackBarBehavior.floating,
             ),
           );
@@ -73,31 +89,34 @@ class _MapPageState extends ConsumerState<MapPage> {
         return;
       }
 
-      Position position = await Geolocator.getCurrentPosition();
+      final position = await Geolocator.getCurrentPosition();
       setState(() {
         _currentPosition = position;
       });
 
-      _mapController.move(LatLng(position.latitude, position.longitude), 15.0);
+      _mapController.move(LatLng(position.latitude, position.longitude), 15);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
-          SnackBar(
-            content: Text('خطا در دریافت موقعیت: $e'),
+          const SnackBar(
+            content: Text('خطا در دریافت موقعیت'),
             behavior: SnackBarBehavior.floating,
           ),
         );
       }
     } finally {
-      setState(() {
-        _isLoadingLocation = false;
-      });
+      if (mounted) {
+        setState(() {
+          _isLoadingLocation = false;
+        });
+      }
     }
   }
 
   @override
   Widget build(BuildContext context) {
     final stationsAsync = ref.watch(allStationsProvider);
+
     return Scaffold(
       backgroundColor: const Color(0xFF1A1A1A),
       appBar: AppBar(
@@ -131,15 +150,31 @@ class _MapPageState extends ConsumerState<MapPage> {
       ),
       body: stationsAsync.when(
         data: (stations) {
+          LatLng center = const LatLng(36.2974, 59.6059);
+          double zoom = 15;
+
+          if (widget.focusStationName != null) {
+            final station = stations.firstWhere(
+              (s) => s.name == widget.focusStationName,
+              orElse: () => stations.first,
+            );
+            final lat = double.tryParse(station.latitude);
+            final lng = double.tryParse(station.longitude);
+            if (lat != null && lng != null) {
+              center = LatLng(lat, lng);
+              zoom = 16;
+            }
+          }
+
           return Stack(
             children: [
               FlutterMap(
                 mapController: _mapController,
                 options: MapOptions(
-                  initialCenter: const LatLng(36.2974, 59.6059),
-                  initialZoom: 15.0,
-                  minZoom: 10.0,
-                  maxZoom: 18.0,
+                  initialCenter: center,
+                  initialZoom: zoom,
+                  minZoom: 10,
+                  maxZoom: 18,
                 ),
                 children: [
                   TileLayer(
@@ -194,15 +229,9 @@ class _MapPageState extends ConsumerState<MapPage> {
                       ? const SizedBox(
                           width: 24,
                           height: 24,
-                          child: CircularProgressIndicator(
-                            strokeWidth: 2,
-                            color: Colors.deepPurple,
-                          ),
+                          child: CircularProgressIndicator(strokeWidth: 2),
                         )
-                      : Icon(
-                          Icons.my_location,
-                          color: Colors.deepPurple.shade700,
-                        ),
+                      : const Icon(Icons.my_location, color: Colors.deepPurple),
                 ),
               ),
             ],
@@ -238,9 +267,7 @@ class _MapPageState extends ConsumerState<MapPage> {
             width: hasMultipleLines ? 50 : 40,
             height: hasMultipleLines ? 50 : 40,
             child: GestureDetector(
-              onTap: () {
-                _showStationBottomSheet(station);
-              },
+              onTap: () => _showStationBottomSheet(station),
               child: Stack(
                 children: [
                   Container(
@@ -264,8 +291,7 @@ class _MapPageState extends ConsumerState<MapPage> {
                       ),
                     ),
                   ),
-
-                  if (hasMultipleLines && station.lines.length > 1)
+                  if (hasMultipleLines)
                     Positioned(
                       right: 0,
                       top: 0,
@@ -305,10 +331,7 @@ class _MapPageState extends ConsumerState<MapPage> {
       builder: (context) => Container(
         decoration: const BoxDecoration(
           color: Color(0xFF2D2D2D),
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
+          borderRadius: BorderRadius.vertical(top: Radius.circular(20)),
         ),
         padding: const EdgeInsets.all(20),
         child: Column(
@@ -358,16 +381,14 @@ class _MapPageState extends ConsumerState<MapPage> {
                     'خط $lineNum',
                     style: const TextStyle(
                       color: Colors.white,
-                      fontSize: 16,
+                      fontSize: 20,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                 );
               }).toList(),
             ),
-
-            const SizedBox(height: 16),
-
+            const SizedBox(height: 12),
             SizedBox(
               width: double.infinity,
               child: ElevatedButton.icon(
@@ -376,15 +397,14 @@ class _MapPageState extends ConsumerState<MapPage> {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) =>
-                          StationDetail(stationName: station.name),
+                      builder: (_) => StationDetail(stationName: station.name),
                     ),
                   );
                 },
                 icon: const Icon(Icons.info_outline),
                 label: const Text(
                   'مشاهده جزئیات ایستگاه',
-                  style: TextStyle(fontSize: 19, fontWeight: FontWeight.bold),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                 ),
                 style: ElevatedButton.styleFrom(
                   backgroundColor: _parseColor(
