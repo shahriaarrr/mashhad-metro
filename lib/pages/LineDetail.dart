@@ -98,7 +98,12 @@ class LineDetailPage extends ConsumerWidget {
               });
 
               return SliverPadding(
-                padding: EdgeInsets.all(16),
+                padding: EdgeInsets.only(
+                  left: 16,
+                  right: 16,
+                  top: 16,
+                  bottom: 16 + MediaQuery.of(context).padding.bottom,
+                ),
                 sliver: SliverList(
                   delegate: SliverChildBuilderDelegate((context, index) {
                     final station = lineStations[index];
