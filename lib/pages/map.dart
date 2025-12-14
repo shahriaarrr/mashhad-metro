@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:mashhad_metro/models/station_model.dart';
 import 'package:mashhad_metro/pages/station_details.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
+import 'dart:async';
 
 class MapPage extends ConsumerStatefulWidget {
   final String? focusStationName;
@@ -20,6 +21,7 @@ class _MapPageState extends ConsumerState<MapPage> {
   final MapController _mapController = MapController();
   Position? _currentPosition;
   bool _isLoadingLocation = false;
+  StreamSubscription<Position>? _positionStreamSubscription;
 
   @override
   void initState() {
@@ -29,6 +31,12 @@ class _MapPageState extends ConsumerState<MapPage> {
         _focusOnStation();
       });
     }
+  }
+
+  @override
+  void dispose() {
+    _positionStreamSubscription?.cancel();
+    super.dispose();
   }
 
   void _focusOnStation() {
@@ -95,6 +103,10 @@ class _MapPageState extends ConsumerState<MapPage> {
       });
 
       _mapController.move(LatLng(position.latitude, position.longitude), 15);
+
+      if (_positionStreamSubscription == null) {
+        _startLocationTracking();
+      }
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
@@ -111,6 +123,24 @@ class _MapPageState extends ConsumerState<MapPage> {
         });
       }
     }
+  }
+
+  void _startLocationTracking() {
+    const LocationSettings locationSettings = LocationSettings(
+      accuracy: LocationAccuracy.high,
+      distanceFilter: 10,
+    );
+
+    _positionStreamSubscription =
+        Geolocator.getPositionStream(locationSettings: locationSettings).listen(
+          (Position position) {
+            if (mounted) {
+              setState(() {
+                _currentPosition = position;
+              });
+            }
+          },
+        );
   }
 
   @override
