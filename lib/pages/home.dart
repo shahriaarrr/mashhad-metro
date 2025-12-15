@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mashhad_metro/pages/LineDetail.dart';
+import 'package:mashhad_metro/pages/about.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
 import 'package:mashhad_metro/models/station_model.dart';
 import 'package:mashhad_metro/widgets/line_card.dart';
@@ -303,11 +304,10 @@ class MyHomePage extends ConsumerWidget {
                   subtitle: 'ABOUT US',
                   onTap: () {
                     Navigator.pop(context);
-
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('این صفحه بزودی اضافه میشود'),
-                        behavior: SnackBarBehavior.floating,
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const AboutPage(),
                       ),
                     );
                   },

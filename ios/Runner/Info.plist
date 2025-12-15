@@ -11,6 +11,12 @@
     <key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
     <string>این اپلیکیشن برای نمایش موقعیت شما در نقشه به دسترسی موقعیت مکانی نیاز دارد</string>
 
+	<key>LSApplicationQueriesSchemes</key>
+    <array>
+        <string>https</string>
+        <string>http</string>
+    </array>
+
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleDisplayName</key>
