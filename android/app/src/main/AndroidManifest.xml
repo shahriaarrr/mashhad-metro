@@ -23,7 +23,7 @@
     </queries>
 
     <application
-        android:label="mashhad_metro"
+        android:label="Mashhad Metro"
         android:name="${applicationName}"
         android:icon="@mipmap/ic_launcher">
         <activity
