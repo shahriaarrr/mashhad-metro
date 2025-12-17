@@ -74,10 +74,11 @@ class AboutPage extends ConsumerWidget {
                         ),
                       ],
                     ),
-                    child: const Icon(
-                      Icons.subway,
-                      size: 60,
-                      color: Colors.white,
+                    child: Image.asset(
+                      'assets/icon/1.png',
+                      width: 120,
+                      height: 120,
+                      fit: BoxFit.contain,
                     ),
                   ),
                   const SizedBox(height: 4),
