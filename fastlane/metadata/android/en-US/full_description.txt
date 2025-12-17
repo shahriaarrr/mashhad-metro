@@ -1,0 +1,14 @@
+Mashhad Metro is a comprehensive and user-friendly guide for navigating the metro system of Mashhad, the holy city. Designed to simplify daily commutes for both residents and pilgrims visiting Imam Reza's shrine, this app provides complete information about stations, metro lines, facilities, and route planning.
+Whether you're a local commuter or a first-time visitor to Mashhad, our app helps you navigate the metro system with confidence and ease.
+
+What You Can Do:
+- Browse the complete list of stations across all metro lines
+- Access detailed information for each station including address, facilities, and exact location
+- View all stations on an interactive map
+- Find stations with specific amenities such as elevators, restrooms, WiFi, and more
+- Easily switch between different metro lines and identify interchange stations
+- Use the app completely offline - no internet connection required
+
+Why Choose Mashhad Metro?
+This application is completely free and open-source, built with love for the pilgrims and residents of Mashhad. We're committed to making your journey through the holy city as smooth and stress-free as possible.
+Perfect for daily commuters, tourists, and pilgrims alike, Mashhad Metro is your essential companion for exploring the city's metro system.

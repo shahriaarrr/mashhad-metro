@@ -1,0 +1,6 @@
+- Interactive Map - View all stations on the map with zoom and navigation capabilities
+- Complete Station Information - Access detailed information for each station including facilities and addresses
+- Offline Access - Use all station information without an internet connection
+- Facilities Finder - Easily locate stations with specific amenities like elevators, restrooms, and WiFi
+- Multi-Line Support - Browse all metro lines and identify interchange stations
+- Real-Time Location - See stations on the map with precise geographical coordinates
