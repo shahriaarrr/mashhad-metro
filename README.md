@@ -2,7 +2,9 @@
 
 # 🚇 Mashhad Metro
 
-![Mashhad Metro Logo](assets/icon/1.png)
+<figure>
+  <img src="assets/icon/1.png" width="470" />
+</figure>
 
 ### A comprehensive guide to navigate Mashhad Metro system effortlessly
 
