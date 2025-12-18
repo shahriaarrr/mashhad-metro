@@ -27,6 +27,11 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
+    dependenciesInfo {
+        includeInApk = false
+        includeInBundle = false
+    }
+
     defaultConfig {
         applicationId = "ir.shahriaarrr.mashhad_metro"
         minSdk = flutter.minSdkVersion
