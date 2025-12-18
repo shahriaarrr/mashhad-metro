@@ -153,6 +153,14 @@ Please read our [Contributing Guidelines](CONTRIBUTING.md) for more details.
 
 ---
 
+## 💖 Credits
+
+The user interface of this project was inspired by the beautiful design of the **[Tehran Metro App](https://github.com/mosayeb-a/tehran-metro)** created by **[@mosayeb-a](https://github.com/mosayeb-a)**.  
+
+Their thoughtful approach to creating an intuitive and visually appealing metro navigation experience served as a foundation for this project's design language. We're grateful for their contribution to making public transportation more accessible through great design.
+
+---
+
 ## 🐛 Bug Reports
 
 If you encounter any issues, please [open an issue](https://github.com/shahriaarrr/mashhad-metro/issues) with:
