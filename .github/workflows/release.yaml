@@ -77,9 +77,9 @@ jobs:
         
       - name: Update iOS bundle identifier
         run: |
-          echo "Setting iOS bundle ID to ir.shahriaarrr.tomodoro"
-          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier ir.shahriaarrr.tomodoro" ios/Runner/Info.plist
-          sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = .*;/PRODUCT_BUNDLE_IDENTIFIER = ir.shahriaarrr.tomodoro;/g' ios/Runner.xcodeproj/project.pbxproj
+          echo "Setting iOS bundle ID to ir.shahriaarrr.mashhad_metro"
+          /usr/libexec/PlistBuddy -c "Set :CFBundleIdentifier ir.shahriaarrr.mashhad_metro" ios/Runner/Info.plist
+          sed -i '' 's/PRODUCT_BUNDLE_IDENTIFIER = .*;/PRODUCT_BUNDLE_IDENTIFIER = ir.shahriaarrr.mashhad_metro;/g' ios/Runner.xcodeproj/project.pbxproj
       
       - name: Build iOS IPA (unsigned)
         run: |
