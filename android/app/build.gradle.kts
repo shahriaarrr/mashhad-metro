@@ -27,6 +27,11 @@ android {
         jvmTarget = JavaVersion.VERSION_11.toString()
     }
 
+    configurations.all {
+        exclude(group = "com.google.android.play", module = "core")
+        exclude(group = "com.google.android.play", module = "core-common")
+    }
+
     dependenciesInfo {
         includeInApk = false
         includeInBundle = false
