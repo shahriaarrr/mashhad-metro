@@ -13,11 +13,6 @@ if (keystorePropertiesFile.exists()) {
     keystoreProperties.load(FileInputStream(keystorePropertiesFile))
 }
 
-configurations.all {
-    exclude(group = "com.google.android.play", module = "core")
-    exclude(group = "com.google.android.play", module = "core-common")
-}
-
 android {
     namespace = "com.example.mashhad_metro"
     compileSdk = flutter.compileSdkVersion
@@ -59,8 +54,8 @@ android {
     buildTypes {
         release {
             signingConfig = signingConfigs.getByName("release")
-            isMinifyEnabled = false
-            isShrinkResources = false
+            isMinifyEnabled = true
+            isShrinkResources = true
         }
     }
 
