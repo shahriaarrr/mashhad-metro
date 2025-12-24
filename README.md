@@ -56,14 +56,14 @@ Whether you're a daily commuter or visiting the holy city for the first time, Ma
 
 ---
 
-<!-- ## 📥 Download
+## 📥 Download
 
 | Platform   | Myket | Bazaar | Anardoni | F-Droid | GitHub Releases |
 |------------|:----------:|:-------:|:---------:|:-------:|:---------------:|
-| Android    | coming soon... | [<img src="./assets/download%20icons/bazaar.png" alt="Bazaar" width="120"/>]() | - | [<img src="https://fdroid.gitlab.io/artwork/badge/get-it-on.png" alt="F-Droid" width="120"/>]() | [![GitHub Release](https://img.shields.io/badge/GitHub-Release-24292F?logo=github&logoColor=white)](https://github.com/shahriaarrr/mashhad_metro/releases) |
-| iOS        | - | - | [<img src="./assets/download%20icons/anardoni.png" alt="Anardoni" width="120"/>]() | - | [![GitHub Release](https://img.shields.io/badge/GitHub-Release-24292F?logo=github&logoColor=white)](https://github.com/shahriaarrr/mashhad_metro/releases) |
+| Android    | [<img src="./assets/download_icons/myket.png" alt="Myket" width="120"/>](https://myket.ir/app/ir.shahriaarrr.mashhad_metro) | [<img src="./assets/download_icons/bazaar.png" alt="Bazaar" width="120"/>](https://cafebazaar.ir/app/ir.shahriaarrr.mashhad_metro) | - | [<img src="https://img.shields.io/badge/F--Droid-coming%20soon-1976D2?logo=fdroid&logoColor=white" alt="F-Droid" width="120"/>]() | [![GitHub Release](https://img.shields.io/badge/GitHub-Release-24292F?logo=github&logoColor=white)](https://github.com/shahriaarrr/mashhad_metro/releases) |
+| iOS        | - | - | [<img src="./assets/download_icons/anardoni.png" alt="Anardoni" width="120"/>](https://anardoni.com/ios/app/irshahriaarrrmashhad-metro) | - | [![GitHub Release](https://img.shields.io/badge/GitHub-Release-24292F?logo=github&logoColor=white)](https://github.com/shahriaarrr/mashhad_metro/releases) |
 
---- -->
+---
 
 ## 🛠️ Build from Source
 
