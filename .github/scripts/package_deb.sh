@@ -5,12 +5,13 @@ set -euo pipefail
 # If tag is not provided or is a branch name, read version from pubspec.yaml
 
 TAG=${1:-}
-PKG_NAME="mashhad_metro"
+BINARY_NAME="mashhad_metro"  # نام باینری از pubspec
+PKG_NAME="mashhad-metro"     # نام پکیج برای Debian (با dash)
 
 # Function to read version from pubspec.yaml
 get_version_from_pubspec() {
   if [ -f pubspec.yaml ]; then
-    # Extract version line and get the version number
+    # Extract version line and get the version number (before +)
     VERSION=$(grep "^version:" pubspec.yaml | sed 's/version: *//' | sed 's/+.*//')
     echo "$VERSION"
   else
@@ -46,10 +47,10 @@ mkdir -p "$ICON_DIR"
 mkdir -p "$DESKTOP_DIR"
 
 # Copy the linux release binary (or executable bundle)
-if [ -f build/linux/x64/release/bundle/${PKG_NAME} ]; then
-  cp build/linux/x64/release/bundle/${PKG_NAME} "$ARCH_DIR/"
+if [ -f build/linux/x64/release/bundle/${BINARY_NAME} ]; then
+  cp build/linux/x64/release/bundle/${BINARY_NAME} "$ARCH_DIR/"
 else
-  echo "Error: Binary not found at build/linux/x64/release/bundle/${PKG_NAME}"
+  echo "Error: Binary not found at build/linux/x64/release/bundle/${BINARY_NAME}"
   exit 1
 fi
 
@@ -63,7 +64,7 @@ cat > "$DESKTOP_DIR/${PKG_NAME}.desktop" <<EOF
 [Desktop Entry]
 Type=Application
 Name=Mashhad Metro
-Exec=/usr/bin/${PKG_NAME}
+Exec=/usr/bin/${BINARY_NAME}
 Icon=${PKG_NAME}
 Categories=Utility;Education;
 Terminal=false
