@@ -1,29 +1,24 @@
 name: Build and Release Flutter App (Linux)
-
 permissions:
   contents: write
   packages: write
-
 on:
   release:
     types: [published]
   workflow_dispatch:
-
 jobs:
   build-and-attach:
     name: Build Linux and Attach to Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
-
       - name: Set up Flutter
-        uses: subosito/flutter-action@v2
+        uses: subosito/flutter-action@v2.16.0
         with:
-          flutter-version: "3.35.7"
+          flutter-version: "3.24.0"
           channel: "stable"
           cache: true
-
       - name: Cache Dart & Flutter dependencies
         uses: actions/cache@v3
         with:
@@ -33,10 +28,8 @@ jobs:
           key: ${{ runner.os }}-dart-deps-${{ hashFiles('**/pubspec.lock') }}
           restore-keys: |
             ${{ runner.os }}-dart-deps-
-
       - name: Install dependencies
         run: flutter pub get
-
       - name: Install system dependencies for Linux build
         run: |
           sudo apt-get update -y
@@ -52,11 +45,10 @@ jobs:
             cmake \
             ninja-build \
             libpulse-dev \
-            libdbus-1-dev
-
+            libdbus-1-dev \
+            zip
       - name: Build Linux release
         run: flutter build linux --release
-
       - name: Verify build output
         run: |
           ls -lah build/linux/x64/release/bundle/
@@ -64,24 +56,15 @@ jobs:
             echo "Error: Binary not found"
             exit 1
           fi
-
-      - name: Make packaging scripts executable
+      - name: Zip Linux bundle
         run: |
-          chmod +x .github/scripts/package_deb.sh
-          chmod +x .github/scripts/package_arch.sh
-
-      - name: Package .deb
-        run: .github/scripts/package_deb.sh ${{ github.ref_name }}
-
-      - name: Package Arch (pkg.tar.zst)
-        run: .github/scripts/package_arch.sh ${{ github.ref_name }}
-
-      - name: Attach packages to GitHub Release
+          cd build/linux/x64/release/bundle
+          zip -r ../../../../mashhad_metro_linux_${{ github.ref_name }}.zip .
+      - name: Attach zip to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           tag_name: ${{ github.ref_name }}
           files: |
-            build/*.deb
-            build/*.pkg.tar.*
+            build/mashhad_metro_linux_${{ github.ref_name }}.zip
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
