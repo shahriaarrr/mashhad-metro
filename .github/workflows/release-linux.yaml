@@ -15,26 +15,12 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Cache Flutter SDK
-        uses: actions/cache@v3
-        with:
-          path: ${{ runner.tool_cache }}/flutter
-          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}-3.35.7
-          restore-keys: |
-            ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}-
-            ${{ runner.os }}-flutter-
-
-      - name: Set up Dart SDK
-        uses: dart-lang/setup-dart@v1
-        with:
-          sdk: "3.9.2"
+        uses: actions/checkout@v4
 
       - name: Set up Flutter
         uses: subosito/flutter-action@v2
         with:
-          flutter-version: "3.35.7"
+          flutter-version: "3.24.5"  # نسخه صحیح
           channel: "stable"
           cache: true
 
@@ -51,18 +37,43 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
 
+      - name: Install system dependencies for Linux build
+        run: |
+          sudo apt-get update -y
+          sudo apt-get install -y --no-install-recommends \
+            build-essential \
+            pkg-config \
+            libgtk-3-dev \
+            libasound2-dev \
+            libx11-dev \
+            libglu1-mesa-dev \
+            libgdk-pixbuf2.0-dev \
+            clang \
+            cmake \
+            ninja-build \
+            libpulse-dev \
+            libdbus-1-dev
+
       - name: Build Linux release
         run: flutter build linux --release
 
+      - name: Verify build output
+        run: |
+          ls -lah build/linux/x64/release/bundle/
+          if [ ! -f build/linux/x64/release/bundle/mashhad_metro ]; then
+            echo "Error: Binary not found"
+            exit 1
+          fi
+
       - name: Make packaging scripts executable
         run: |
-          chmod +x .github/scripts/package_deb.sh || true
-          chmod +x .github/scripts/package_arch.sh || true
+          chmod +x .github/scripts/package_deb.sh
+          chmod +x .github/scripts/package_arch.sh
 
       - name: Package .deb
         run: .github/scripts/package_deb.sh ${{ github.ref_name }}
 
-      - name: Package Arch (pkg.tar.zst via Arch container)
+      - name: Package Arch (pkg.tar.zst)
         run: .github/scripts/package_arch.sh ${{ github.ref_name }}
 
       - name: Attach packages to GitHub Release
@@ -72,6 +83,5 @@ jobs:
           files: |
             build/*.deb
             build/*.pkg.tar.*
-            build/*.AppImage
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
