@@ -1,0 +1,77 @@
+name: Build and Release Flutter App (Linux)
+
+permissions:
+  contents: write
+  packages: write
+
+on:
+  release:
+    types: [published]
+  workflow_dispatch:
+
+jobs:
+  build-and-attach:
+    name: Build Linux and Attach to Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Cache Flutter SDK
+        uses: actions/cache@v3
+        with:
+          path: ${{ runner.tool_cache }}/flutter
+          key: ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}-3.35.7
+          restore-keys: |
+            ${{ runner.os }}-flutter-${{ hashFiles('**/pubspec.lock') }}-
+            ${{ runner.os }}-flutter-
+
+      - name: Set up Dart SDK
+        uses: dart-lang/setup-dart@v1
+        with:
+          sdk: "3.9.2"
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "3.35.7"
+          channel: "stable"
+          cache: true
+
+      - name: Cache Dart & Flutter dependencies
+        uses: actions/cache@v3
+        with:
+          path: |
+            ~/.pub-cache
+            .dart_tool
+          key: ${{ runner.os }}-dart-deps-${{ hashFiles('**/pubspec.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-dart-deps-
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Linux release
+        run: flutter build linux --release
+
+      - name: Make packaging scripts executable
+        run: |
+          chmod +x .github/scripts/package_deb.sh || true
+          chmod +x .github/scripts/package_arch.sh || true
+
+      - name: Package .deb
+        run: .github/scripts/package_deb.sh ${{ github.ref_name }}
+
+      - name: Package Arch (pkg.tar.zst via Arch container)
+        run: .github/scripts/package_arch.sh ${{ github.ref_name }}
+
+      - name: Attach packages to GitHub Release
+        uses: softprops/action-gh-release@v1
+        with:
+          tag_name: ${{ github.ref_name }}
+          files: |
+            build/*.deb
+            build/*.pkg.tar.*
+            build/*.AppImage
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

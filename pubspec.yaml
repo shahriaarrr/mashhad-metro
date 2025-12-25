@@ -68,6 +68,13 @@ flutter_icons:
   ios: true
   image_path: "assets/icon/1.png"
 
+  linux:
+    enable: true
+
+  windows:
+    generate: true
+    image_path: "assets/icon/1.png"
+
 # The following section is specific to Flutter packages.
 flutter:
 
