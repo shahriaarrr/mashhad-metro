@@ -656,11 +656,11 @@
     "Basij": {
         "name": "Basij",
         "translations": {"fa": "بسیج"},
-        "lines": [1],
+        "lines": [1, 3],
         "longitude": "59.60328273666735",
         "latitude": "36.27380398360998",
         "address": "بلوار ملک الشعرای بهار-میدان بسیج(فلکه برق)",
-        "colors": ["#1C5D99"],
+        "colors": ["#1C5D99", "#FA9702"],
         "disabled": false,
         "wc": true,
         "coffeeShop": true,
@@ -683,11 +683,17 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Hefdah-e-Shahrivar"],
-        "positionInLine": [{
-            "position": 19,
-            "line": 1
-        }]
+        "relations": ["Hefdah-e-Shahrivar", "Bab Al-javad"],
+        "positionInLine": [
+            {
+                "position": 19,
+                "line": 1
+            },
+            {
+                "position": 2,
+                "line": 3
+            }
+        ]
     },
     "Hefdah-e-Shahrivar": {
         "name": "Hefdah-e-Shahrivar",
@@ -1123,7 +1129,7 @@
                 "line": 2
             },
             {
-                "position": 2,
+                "position": 4,
                 "line": 3
             }
         ]
@@ -1163,10 +1169,6 @@
             {
                 "position": 8,
                 "line": 2
-            },
-            {
-                "position": 2,
-                "line": 3
             }
         ]
     },
@@ -1353,7 +1355,7 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Shohada"],
+        "relations": ["Basij"],
         "positionInLine": [
             {
                 "position": 1,
@@ -1391,7 +1393,7 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": [],
+        "relations": ["Shohada"],
         "positionInLine": [
             {
                 "position": 3,
