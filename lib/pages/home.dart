@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mashhad_metro/pages/LineDetail.dart';
 import 'package:mashhad_metro/pages/about.dart';
+import 'package:mashhad_metro/pages/donation.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
 import 'package:mashhad_metro/models/station_model.dart';
 import 'package:mashhad_metro/widgets/line_card.dart';
@@ -308,6 +309,22 @@ class MyHomePage extends ConsumerWidget {
                       context,
                       MaterialPageRoute(
                         builder: (context) => const AboutPage(),
+                      ),
+                    );
+                  },
+                ),
+
+                _buildDrawerItem(
+                  context: context,
+                  icon: Icons.monetization_on_outlined,
+                  title: 'حمایت مالی',
+                  subtitle: 'DONATE US',
+                  onTap: () {
+                    Navigator.pop(context);
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DonatePage(),
                       ),
                     );
                   },
