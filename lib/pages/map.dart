@@ -246,6 +246,14 @@ class _MapPageState extends ConsumerState<MapPage> {
                         ),
                       ],
                     ),
+
+                  RichAttributionWidget(
+                    alignment: AttributionAlignment.bottomLeft,
+                    popupInitialDisplayDuration: const Duration(seconds: 3),
+                    attributions: [
+                      TextSourceAttribution('© OpenStreetMap contributors'),
+                    ],
+                  ),
                 ],
               ),
 
