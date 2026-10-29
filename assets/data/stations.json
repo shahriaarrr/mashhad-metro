@@ -497,15 +497,15 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Taleghani"],
+        "relations": ["Shahid Shooshtari"],
         "positionInLine": [{
             "position": 14,
             "line": 1
         }]
     },
-    "Taleghani": {
-        "name": "Taleghani",
-        "translations": {"fa": "طالقانی"},
+    "Shahid Shooshtari": {
+        "name": "Shahid Shooshtari",
+        "translations": {"fa": "شهید فرج الله شوشتری(طالقانی)"},
         "lines": [1],
         "longitude": "59.572883505668415",
         "latitude": "36.29724700829637",
