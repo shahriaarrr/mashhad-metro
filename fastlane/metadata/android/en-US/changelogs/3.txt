@@ -4,3 +4,4 @@
 - Added unavailable status indicators to station lists
 - Added unavailable status notices to station detail pages
 - Clarified that unavailable stations and their facilities cannot be accessed
+- Remove Crypto donation
