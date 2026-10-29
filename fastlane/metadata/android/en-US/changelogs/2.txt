@@ -1,0 +1,4 @@
+- Updated station information and route for Metro Line 3
+- Added Flutter Map and OpenStreetMap copyright/attribution notice to the map view
+- Added a new "Support the Project" page to the app
+- Lets users contribute to the development and maintenance of Mashhad Metro

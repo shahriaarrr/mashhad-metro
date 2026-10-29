@@ -1,0 +1,6 @@
+- Added three new stations to Metro Line 3
+- Updated Taleghani station's name to Shahid Shooshtari
+- Added visual indicators for unavailable stations on the map
+- Added unavailable status indicators to station lists
+- Added unavailable status notices to station detail pages
+- Clarified that unavailable stations and their facilities cannot be accessed
