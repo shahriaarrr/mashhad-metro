@@ -1122,7 +1122,7 @@
         "petsAllowed": false,
         "freeWifi": false,
         "prayerRoom": true,
-        "relations": ["Bab Al-javad","Sa'adi"],
+        "relations": ["Bab Al-javad","Sa'adi", "Shahid Raisi"],
         "positionInLine": [
             {
                 "position": 7,
@@ -1397,6 +1397,120 @@
         "positionInLine": [
             {
                 "position": 3,
+                "line": 3
+            }
+        ]
+    },
+    "Shahid Raisi": {
+        "name": "Shahid Raisi",
+        "translations": {"fa": "شهید رئیسی"},
+        "lines": [3],
+        "longitude": "59.599740",
+        "latitude": "36.303870",
+        "address": "محدوده میدان شهید رئیسی یا فلکه دروازه قوچان، حوالی خیابان توحید.",
+        "colors": ["#FA9702"],
+        "disabled": true,
+        "wc": false,
+        "coffeeShop": false,
+        "groceryStore": false,
+        "fastFood": false,
+        "atm": false,
+        "elevator": false,
+        "bicycleParking": false,
+        "NearHolyshrine": false,
+        "cleanFood": false,
+        "blindPath": false,
+        "fireSuppressionSystem": false,
+        "fireExtinguisher": false,
+        "metroPolice": false,
+        "creditTicketSales": false,
+        "waitingChair": false,
+        "camera": false,
+        "trashCan": false,
+        "smoking": false,
+        "petsAllowed": false,
+        "freeWifi": false,
+        "prayerRoom": true,
+        "relations": ["Shahid Gharani"],
+        "positionInLine": [
+            {
+                "position": 4,
+                "line": 3
+            }
+        ]
+    },
+    "Shahid Gharani": {
+        "name": "Shahid Gharani",
+        "translations": {"fa": "شهید قرنی"},
+        "lines": [3],
+        "longitude": "59.588500",
+        "latitude": "36.314000",
+        "address": "محدوده محور بلوار شهید قرنی در مسیر میدان شهدا به میدان فردوسی.",
+        "colors": ["#FA9702"],
+        "disabled": true,
+        "wc": false,
+        "coffeeShop": false,
+        "groceryStore": false,
+        "fastFood": false,
+        "atm": false,
+        "elevator": false,
+        "bicycleParking": false,
+        "NearHolyshrine": false,
+        "cleanFood": false,
+        "blindPath": false,
+        "fireSuppressionSystem": false,
+        "fireExtinguisher": false,
+        "metroPolice": false,
+        "creditTicketSales": false,
+        "waitingChair": false,
+        "camera": false,
+        "trashCan": false,
+        "smoking": false,
+        "petsAllowed": false,
+        "freeWifi": false,
+        "prayerRoom": true,
+        "relations": ["Ferdowsi"],
+        "positionInLine": [
+            {
+                "position": 5,
+                "line": 3
+            }
+        ]
+    },
+    "Ferdowsi": {
+        "name": "Ferdowsi",
+        "translations": {"fa": "فردوسی"},
+        "lines": [3],
+        "longitude": "59.577860",
+        "latitude": "36.323570",
+        "address": "میدان فردوسی مشهد، محدوده اتصال بلوار فردوسی و بلوار توس.",
+        "colors": ["#FA9702"],
+        "disabled": true,
+        "wc": false,
+        "coffeeShop": false,
+        "groceryStore": false,
+        "fastFood": false,
+        "atm": false,
+        "elevator": false,
+        "bicycleParking": false,
+        "NearHolyshrine": false,
+        "cleanFood": false,
+        "blindPath": false,
+        "fireSuppressionSystem": false,
+        "fireExtinguisher": false,
+        "metroPolice": false,
+        "creditTicketSales": false,
+        "waitingChair": false,
+        "camera": false,
+        "trashCan": false,
+        "smoking": false,
+        "petsAllowed": false,
+        "freeWifi": false,
+        "prayerRoom": true,
+        "relations": [],
+        "positionInLine": [
+            {
+                "position": 6,
                 "line": 3
             }
         ]
