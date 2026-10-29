@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../models/station_model.dart';
 import 'package:mashhad_metro/pages/station_details.dart';
+import 'station_status.dart';
 
 class StationItem extends StatelessWidget {
   final StationModel station;
@@ -59,17 +60,32 @@ class StationItem extends StatelessWidget {
                   height: 20,
                   decoration: BoxDecoration(
                     shape: BoxShape.circle,
-                    color: currentLineColor,
-                    border: Border.all(color: Colors.white, width: 3),
-                    boxShadow: [
-                      BoxShadow(
-                        color: currentLineColor.withOpacity(0.5),
-                        blurRadius: 8,
-                        spreadRadius: 2,
-                      ),
-                    ],
+                    color: station.disabled
+                        ? const Color(0xFF343434)
+                        : currentLineColor,
+                    border: Border.all(
+                      color: station.disabled
+                          ? stationUnavailableColor
+                          : Colors.white,
+                      width: station.disabled ? 2 : 3,
+                    ),
+                    boxShadow: station.disabled
+                        ? []
+                        : [
+                            BoxShadow(
+                              color: currentLineColor.withOpacity(0.5),
+                              blurRadius: 8,
+                              spreadRadius: 2,
+                            ),
+                          ],
                   ),
-                  child: hasTransfer
+                  child: station.disabled
+                      ? const Icon(
+                          Icons.block,
+                          color: stationUnavailableColor,
+                          size: 12,
+                        )
+                      : hasTransfer
                       ? Center(
                           child: Container(
                             width: 8,
@@ -125,9 +141,18 @@ class StationItem extends StatelessWidget {
                   borderRadius: BorderRadius.circular(16),
                   child: Container(
                     decoration: BoxDecoration(
-                      color: const Color(0xFF2D2D2D),
+                      color: station.disabled
+                          ? const Color(0xFF292725)
+                          : const Color(0xFF2D2D2D),
                       borderRadius: BorderRadius.circular(16),
-                      border: hasTransfer
+                      border: station.disabled
+                          ? Border.all(
+                              color: stationUnavailableColor.withValues(
+                                alpha: 0.45,
+                              ),
+                              width: 1.5,
+                            )
+                          : hasTransfer
                           ? Border.all(
                               color: currentLineColor.withOpacity(0.3),
                               width: 2,
@@ -199,6 +224,10 @@ class StationItem extends StatelessWidget {
                                         height: 1.2,
                                       ),
                                     ),
+                                    if (station.disabled) ...[
+                                      const SizedBox(height: 10),
+                                      const StationUnavailableBadge(),
+                                    ],
                                   ],
                                 ),
                               ),

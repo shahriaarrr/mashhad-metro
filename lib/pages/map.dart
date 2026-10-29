@@ -6,6 +6,7 @@ import 'package:latlong2/latlong.dart';
 import 'package:mashhad_metro/models/station_model.dart';
 import 'package:mashhad_metro/pages/station_details.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
+import 'package:mashhad_metro/widgets/station_status.dart';
 import 'dart:async';
 
 class MapPage extends ConsumerStatefulWidget {
@@ -309,56 +310,72 @@ class _MapPageState extends ConsumerState<MapPage> {
             point: LatLng(lat, lng),
             width: hasMultipleLines ? 50 : 40,
             height: hasMultipleLines ? 50 : 40,
-            child: GestureDetector(
-              onTap: () => _showStationBottomSheet(station),
-              child: Stack(
-                children: [
-                  Container(
-                    decoration: BoxDecoration(
-                      color: primaryColor,
-                      shape: BoxShape.circle,
-                      border: Border.all(color: Colors.white, width: 3),
-                      boxShadow: [
-                        BoxShadow(
-                          color: primaryColor.withOpacity(0.5),
-                          blurRadius: 8,
-                          spreadRadius: 2,
+            child: Semantics(
+              button: true,
+              label:
+                  '${station.translations['fa'] ?? station.name}، ${station.disabled ? 'ایستگاه غیرفعال' : 'ایستگاه فعال'}',
+              child: GestureDetector(
+                onTap: () => _showStationBottomSheet(station),
+                child: Stack(
+                  children: [
+                    Container(
+                      decoration: BoxDecoration(
+                        color: station.disabled
+                            ? const Color(0xFF424242)
+                            : primaryColor,
+                        shape: BoxShape.circle,
+                        border: Border.all(
+                          color: station.disabled
+                              ? stationUnavailableColor
+                              : Colors.white,
+                          width: 3,
                         ),
-                      ],
-                    ),
-                    child: Center(
-                      child: Icon(
-                        Icons.subway,
-                        color: Colors.white,
-                        size: hasMultipleLines ? 24 : 20,
+                        boxShadow: station.disabled
+                            ? null
+                            : [
+                                BoxShadow(
+                                  color: primaryColor.withOpacity(0.5),
+                                  blurRadius: 8,
+                                  spreadRadius: 2,
+                                ),
+                              ],
+                      ),
+                      child: Center(
+                        child: station.disabled
+                            ? const StationUnavailableIcon(size: 24)
+                            : Icon(
+                                Icons.subway,
+                                color: Colors.white,
+                                size: hasMultipleLines ? 24 : 20,
+                              ),
                       ),
                     ),
-                  ),
-                  if (hasMultipleLines)
-                    Positioned(
-                      right: 0,
-                      top: 0,
-                      child: Container(
-                        width: 16,
-                        height: 16,
-                        decoration: BoxDecoration(
-                          color: _getSecondLineColor(station),
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.white, width: 2),
-                        ),
-                        child: Center(
-                          child: Text(
-                            '${station.lines.length}',
-                            style: const TextStyle(
-                              color: Colors.white,
-                              fontSize: 8,
-                              fontWeight: FontWeight.bold,
+                    if (hasMultipleLines)
+                      Positioned(
+                        right: 0,
+                        top: 0,
+                        child: Container(
+                          width: 16,
+                          height: 16,
+                          decoration: BoxDecoration(
+                            color: _getSecondLineColor(station),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.white, width: 2),
+                          ),
+                          child: Center(
+                            child: Text(
+                              '${station.lines.length}',
+                              style: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 8,
+                                fontWeight: FontWeight.bold,
+                              ),
                             ),
                           ),
                         ),
                       ),
-                    ),
-                ],
+                  ],
+                ),
               ),
             ),
           );
@@ -408,6 +425,10 @@ class _MapPageState extends ConsumerState<MapPage> {
                 ),
                 textAlign: TextAlign.right,
               ),
+              if (station.disabled) ...[
+                const SizedBox(height: 12),
+                const StationUnavailableBadge(),
+              ],
               const SizedBox(height: 16),
 
               Wrap(

@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mashhad_metro/pages/map.dart';
 import 'package:mashhad_metro/providers/station_provider.dart';
 import 'package:mashhad_metro/models/station_model.dart';
+import 'package:mashhad_metro/widgets/station_status.dart';
 
 class StationDetail extends ConsumerWidget {
   final String stationName;
@@ -148,6 +149,10 @@ class StationDetail extends ConsumerWidget {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
+                      if (station.disabled) ...[
+                        const StationUnavailableNotice(),
+                        const SizedBox(height: 24),
+                      ],
                       _buildSection(
                         title: 'خطوط مترو',
                         icon: Icons.subway,
@@ -268,22 +273,29 @@ class StationDetail extends ConsumerWidget {
 
   Widget _buildLineChip(int lineNumber, StationModel station) {
     final position = station.getPositionInLine(lineNumber);
-    final color = _parseColor(
-      station.colors.isNotEmpty ? station.colors.first : '#87CEEB',
-    );
+    final color = station.disabled
+        ? const Color(0xFF555555)
+        : _parseColor(
+            station.colors.isNotEmpty ? station.colors.first : '#87CEEB',
+          );
 
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
       decoration: BoxDecoration(
-        gradient: LinearGradient(colors: [color, color.withOpacity(0.7)]),
+        color: station.disabled ? color : null,
+        gradient: station.disabled
+            ? null
+            : LinearGradient(colors: [color, color.withOpacity(0.7)]),
         borderRadius: BorderRadius.circular(12),
-        boxShadow: [
-          BoxShadow(
-            color: color.withOpacity(0.3),
-            blurRadius: 8,
-            offset: const Offset(0, 2),
-          ),
-        ],
+        boxShadow: station.disabled
+            ? null
+            : [
+                BoxShadow(
+                  color: color.withOpacity(0.3),
+                  blurRadius: 8,
+                  offset: const Offset(0, 2),
+                ),
+              ],
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -319,6 +331,14 @@ class StationDetail extends ConsumerWidget {
   }
 
   Widget _buildFacilities(StationModel station) {
+    if (station.disabled) {
+      return const Text(
+        'تا زمان فعال‌شدن ایستگاه، امکانات آن در دسترس نیست.',
+        style: TextStyle(color: Colors.white70, fontSize: 14, height: 1.6),
+        textAlign: TextAlign.right,
+      );
+    }
+
     final facilities = <Map<String, dynamic>>[
       if (station.wc) {'icon': Icons.wc, 'label': 'سرویس بهداشتی'},
       if (station.elevator) {'icon': Icons.elevator, 'label': 'آسانسور'},
